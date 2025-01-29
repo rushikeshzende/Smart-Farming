@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="page-title">Nutrition Deficiency Prediction</h1>
+
+<form method="POST" enctype="multipart/form-data" id="upload-form" action="/nutrition_deficiency_prediction">
+    <div class="upload-container">
+        <div class="drag-drop-area" id="drag-drop-area">
+            <span class="icon"><i class="fa fa-cloud-upload"></i></span>
+            <p>Drag and Drop your image here</p>
+            <p>OR</p>
+            <label class="choose-files">
+                <input type="file" name="image" accept="image/*" id="file-input" onchange="showUploadedFile(this)">
+                Choose Files
+            </label>
+        </div>
+        <div class="uploaded-image-container hidden" id="uploaded-image-container">
+            <!-- Uploaded image preview and name will appear here -->
+        </div>
+        <button type="submit" class="upload-btn hidden" id="upload-btn">Upload Files</button>
+    </div>
+</form>
+
+
+
+<style>
+    /* Overall Page Styling */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f4f7; /* Previous background color restored */
+    }
+
+    /* Title Styling */
+    .page-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-top: 0; /* Starts immediately at the top */
+        padding-top: 20px; /* Added slight padding */
+        margin-bottom: 20px;
+    }
+
+    /* Upload Container Styling */
+    .upload-container {
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #d3d3d3;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        width: 600px; /* Fixed width for the white box */
+        margin: 20px auto; /* Centers the container on the page */
+    }
+
+    .drag-drop-area {
+        border: 2px dashed #d3d3d3;
+        border-radius: 8px;
+        padding: 20px;
+        cursor: pointer;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+        position: relative;
+    }
+
+    .drag-drop-area p {
+        margin: 5px 0;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .choose-files {
+        display: inline-block;
+        font-size: 16px;
+        color: white;
+        background-color: #9b6bec;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        text-transform: capitalize;
+    }
+
+    .choose-files input {
+        display: none;
+    }
+
+    .upload-btn {
+        font-size: 16px;
+        color: white;
+        background-color: #9b6bec;
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 20px;
+    }
+
+    .upload-btn:hover {
+        background-color: #7d54c7;
+    }
+
+    .icon {
+        font-size: 40px;
+        color: #9b6bec;
+    }
+
+    /* Uploaded Image Container Styling */
+    .uploaded-image-container {
+        background-color: #fff;
+        border: 1px solid #d3d3d3;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        text-align: center;
+        width: 300px; /* Matches the width of the upload container */
+        margin: 20px auto; /* Centers the container */
+    }
+
+    .uploaded-image {
+        max-width: 100%; /* Adjust to fit within the container */
+        max-height: 300px; /* Limit height */
+        object-fit: contain; /* Maintain aspect ratio */
+        border-radius: 8px;
+    }
+
+    .image-name {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+
+<script>
+    const dragDropArea = document.getElementById('drag-drop-area');
+    const fileInput = document.getElementById('file-input');
+    const uploadedImageContainer = document.getElementById('uploaded-image-container');
+    const uploadBtn = document.getElementById('upload-btn');
+
+    dragDropArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dragDropArea.style.backgroundColor = "#ececec";
+    });
+
+    dragDropArea.addEventListener('dragleave', () => {
+        dragDropArea.style.backgroundColor = "#f9f9f9";
+    });
+
+    dragDropArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dragDropArea.style.backgroundColor = "#f9f9f9";
+        fileInput.files = e.dataTransfer.files;
+        showUploadedFile(fileInput);
+    });
+
+    function showUploadedFile(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedImageContainer.classList.remove('hidden');
+                uploadedImageContainer.innerHTML = `
+                    <img src="${e.target.result}" alt="Uploaded Image" class="uploaded-image">
+                    <p class="image-name">${input.files[0].name}</p>
+                `;
+                uploadBtn.classList.remove('hidden');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+{% endblock %}

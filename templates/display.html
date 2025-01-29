@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #4facfe, #9af7a0);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Title Animation */
+        h1 {
+            font-size: 2.5rem;
+            color: #101010;
+            margin-bottom: 20px;
+        }
+
+        /* Data Styling */
+        .predicted-crop {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffffff;
+            animation: slideIn 3s ease-out;
+            margin-top: 20px;
+        }
+
+        /* Animation for Title */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animation for Predicted Crop */
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Button Styling */
+        .buttons {
+            margin-top: 20px;
+            animation: fadeInButtons 4s ease-out;
+        }
+
+        .buttons button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .buttons button:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animation for Buttons */
+        @keyframes fadeInButtons {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <div class="predicted-crop">
+            Predicted Crop: <strong>{{ data }}</strong>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button onclick="location.href='/'">Home</button>
+        <button onclick="location.href='/predict_crop'">Predict Again</button>
+    </div>
+
+</body>
+</html>
