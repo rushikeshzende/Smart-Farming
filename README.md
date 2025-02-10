@@ -1,4 +1,4 @@
-
+**AI Meets Agriculture: My Journey in Smart Farming with Data Science**
 **Introduction**
 
 Artificial Intelligence (AI) is transforming every industry, and agriculture is no exception. Recently, I had the opportunity to participate in an Advanced Data Science Workshop conducted by Shell AI in partnership with Edunet. Over the span of 20 days, I worked on a Smart Farming Project, leveraging AI and Machine Learning (ML) to solve real-world agricultural challenges.
